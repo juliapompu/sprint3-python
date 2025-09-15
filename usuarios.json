@@ -1,0 +1,26 @@
+[
+  {
+    "email": "ana.silva@gmail.com",
+    "senha": "123456",
+    "username": "jogadora10",
+    "nome_real": "Ana Silva",
+    "tipo": "jogadora",
+    "biografia": "Atacante do Flamengo. Apaixonada por futebol desde criança! ⚽️"
+  },
+  {
+    "email": "carolina.oliveira@gmail.com",
+    "senha": "futebol2024",
+    "username": "carol_goleira",
+    "nome_real": "Carolina Oliveira",
+    "tipo": "jogadora",
+    "biografia": "Goleira do Corinthians e da seleção brasileira. Amo fazer defesas difíceis! 🧤"
+  },
+  {
+    "email": "beatriz.santos@gmail.com",
+    "senha": "brasil2024",
+    "username": "bia_torcedora",
+    "nome_real": "Beatriz Santos",
+    "tipo": "torcedora",
+    "biografia": "Torcedora fanática! Não perco um jogo e faço parte da torcida organizada! 🔥"
+  }
+]
