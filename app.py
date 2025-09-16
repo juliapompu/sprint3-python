@@ -8,15 +8,15 @@ class RedeSocialFutebolFeminino:
     def __init__(self):
         self.usuario_logado = None
         self.videos = []
-        self.curtidas = []  # Adicionando lista para armazenar curtidas
+        self.curtidas = []  
         self.arquivo_usuarios = 'usuarios.json'
         self.arquivo_videos = 'videos.json'
-        self.arquivo_curtidas = 'curtidas.json'  # Arquivo para salvar curtidas
+        self.arquivo_curtidas = 'curtidas.json'  
         
         self.usuarios = self.carregar_usuarios()
         self.videos = self.carregar_videos()
-        self.curtidas = self.carregar_curtidas()  # Carregar curtidas
-        
+        self.curtidas = self.carregar_curtidas()
+
         self.adicionar_usuarios_exemplo()
         self.adicionar_videos_exemplo()
 
@@ -478,7 +478,7 @@ class RedeSocialFutebolFeminino:
                 elif escolha == 2 and indice_atual < len(self.videos) - 1:
                     indice_atual += 1
                 elif escolha == 3:
-                    # Buscar id do autor pelo username
+                    # Buscar o autor pelo username
                     autor = next((u for u in self.usuarios if u['username'] == video['autor']), None)
                     if autor:
                         self.ver_perfil_autor(autor['id'])
@@ -506,12 +506,12 @@ class RedeSocialFutebolFeminino:
         user_id = self.usuario_logado.get('id')
         video_id = video.get('id')
         if not video_id:
-            # Se o vídeo não tem id, gera um
+            # Gerar um ID único para o vídeo se não existir
             video_id = str(uuid.uuid4())
             video['id'] = video_id
             self.salvar_videos()
         
-        # Curtidas agora é uma lista de ids de usuário
+        # Verifica se o usuário já curtiu
         if user_id not in video['curtidas']:
             video['curtidas'].append(user_id)
             video['likes'] += 1
@@ -583,7 +583,7 @@ class RedeSocialFutebolFeminino:
         
         input("\n⏎ Pressione Enter para voltar...")
 
-    # NOVOS MÉTODOS DE BUSCA POR ID
+    # buscar usuário por id
     def buscar_usuario_por_id(self, user_id):
         for usuario in self.usuarios:
             if usuario.get('id') == user_id:
@@ -596,7 +596,7 @@ class RedeSocialFutebolFeminino:
                 return video
         return None
 
-    # Exemplo de adaptação: ver_perfil_autor agora pode receber id
+    # ver perfil do autor
     def ver_perfil_autor(self, id_autor):
         autor = self.buscar_usuario_por_id(id_autor)
         if autor:
