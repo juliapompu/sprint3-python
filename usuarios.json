@@ -1,6 +1,7 @@
 [
   {
     "email": "ana.silva@gmail.com",
+    "id": "1",
     "senha": "123456",
     "username": "jogadora10",
     "nome_real": "Ana Silva",
@@ -9,6 +10,7 @@
   },
   {
     "email": "carolina.oliveira@gmail.com",
+    "id": "2",
     "senha": "futebol2024",
     "username": "carol_goleira",
     "nome_real": "Carolina Oliveira",
@@ -17,6 +19,7 @@
   },
   {
     "email": "beatriz.santos@gmail.com",
+    "id": "3",
     "senha": "brasil2024",
     "username": "bia_torcedora",
     "nome_real": "Beatriz Santos",
@@ -25,6 +28,7 @@
   },
   {
     "email": "jogadora10@gmail.com",
+    "id": "4",
     "senha": "senha123",
     "username": "jogadora10",
     "nome_real": "Maria Silva",
@@ -33,6 +37,7 @@
   },
   {
     "email": "carol_goleira@gmail.com",
+    "id": "5",
     "senha": "senha123",
     "username": "carol_goleira",
     "nome_real": "Carolina Santos",
@@ -41,6 +46,7 @@
   },
   {
     "email": "bia_torcedora@gmail.com",
+    "id": "6",
     "senha": "senha123",
     "username": "bia_torcedora",
     "nome_real": "Beatriz Oliveira",

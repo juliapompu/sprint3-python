@@ -2,6 +2,7 @@ import re
 import time
 import json
 import os
+import uuid
 
 class RedeSocialFutebolFeminino:
     def __init__(self):
@@ -104,6 +105,7 @@ class RedeSocialFutebolFeminino:
     def adicionar_videos_exemplo(self):
         videos_exemplo = [
             {
+                'id': str(uuid.uuid4()),
                 'titulo': 'Gol incrível no último minuto! ⚽️',
                 'descricao': 'Gol de falta decisivo no clássico contra o maior rival. Que emoção!',
                 'autor': 'jogadora10',
@@ -112,12 +114,13 @@ class RedeSocialFutebolFeminino:
                 'likes': 980,
                 'curtidas': [],
                 'comentarios': [
-                    {"usuario": 'futfanatica', "comentario": "Que golaço! Parabéns! 🎉"},
-                    {"usuario": 'maria_torcedora', "comentario": "Incrível! Você merece todo esse sucesso! 👏"},
-                    {"usuario": 'ana_jogadora', "comentario": "Inspiração para todas nós! Continue brilhando! ✨"},
+                    {"usuario_id": '', "comentario": "Que golaço! Parabéns! 🎉"},
+                    {"usuario_id": '', "comentario": "Incrível! Você merece todo esse sucesso! 👏"},
+                    {"usuario_id": '', "comentario": "Inspiração para todas nós! Continue brilhando! ✨"},
                 ]
             },
             {
+                'id': str(uuid.uuid4()),
                 'titulo': 'Melhores defesas da temporada 🧤',
                 'descricao': 'Compilação das defesas que garantiram nossa classificação!',
                 'autor': 'carol_goleira',
@@ -126,10 +129,11 @@ class RedeSocialFutebolFeminino:
                 'likes': 750,
                 'curtidas': [],
                 'comentarios': [
-                    {"usuario": 'torcedora_fiel', "comentario": "Você é uma parede! Incrível! 🙌"},
+                    {"usuario_id": '', "comentario": "Você é uma parede! Incrível! 🙌"},
                 ]
             },
             {
+                'id': str(uuid.uuid4()),
                 'titulo': 'Momento emocionante do campeonato 🏆',
                 'descricao': 'Editando os lances mais incríveis da temporada! #PaixãoPeloFutebol',
                 'autor': 'bia_torcedora',
@@ -138,15 +142,39 @@ class RedeSocialFutebolFeminino:
                 'likes': 1200,
                 'curtidas': [],
                 'comentarios': [
-                    {"usuario": 'julia_futebol', "comentario": "Amo esse vídeo! Futebol feminino é tudo! 💜"},
-                    {"usuario": 'linda_jogadora', "comentario": "Muito orgulho de fazer parte dessa comunidade! Vamos juntas! 💪"},
+                    {"usuario_id": '', "comentario": "Amo esse vídeo! Futebol feminino é tudo! 💜"},
+                    {"usuario_id": '', "comentario": "Muito orgulho de fazer parte dessa comunidade! Vamos juntas! 💪"},
                 ]
             }
         ]
-    
         if not self.videos:
             self.videos = videos_exemplo
             self.salvar_videos()
+
+    def postar_video(self):
+        print("\n" + "="*40)
+        print("🎥 POSTAR NOVO VÍDEO")
+        print("="*40)
+        titulo = input("Título do vídeo: ").strip()
+        descricao = input("Descrição: ").strip()
+        link = input("Link do vídeo: ").strip()
+        if not (titulo and descricao and link):
+            print("❌ Todos os campos são obrigatórios!")
+            return
+        novo_video = {
+            'id': str(uuid.uuid4()),
+            'titulo': titulo,
+            'descricao': descricao,
+            'autor': self.usuario_logado['username'],
+            'link': link,
+            'visualizacoes': 0,
+            'likes': 0,
+            'curtidas': [],
+            'comentarios': []
+        }
+        self.videos.append(novo_video)
+        self.salvar_videos()
+        print("✅ Vídeo postado com sucesso!")
 
     def validar_email(self, email):
         formato_valido = r'^[a-zA-Z0-9._%+-]+@gmail\.com$'
@@ -222,6 +250,7 @@ class RedeSocialFutebolFeminino:
         
         novo_usuario = {
             'email': email,
+            'id': str(uuid.uuid4()),
             'senha': senha,
             'username': username,
             'nome_real': nome_real,
@@ -449,7 +478,12 @@ class RedeSocialFutebolFeminino:
                 elif escolha == 2 and indice_atual < len(self.videos) - 1:
                     indice_atual += 1
                 elif escolha == 3:
-                    self.ver_perfil_autor(video['autor'])
+                    # Buscar id do autor pelo username
+                    autor = next((u for u in self.usuarios if u['username'] == video['autor']), None)
+                    if autor:
+                        self.ver_perfil_autor(autor['id'])
+                    else:
+                        print("❌ Autor não encontrado!")
                 elif escolha == 4:
                     self.curtir_video(indice_atual)
                 elif escolha == 5:
@@ -469,17 +503,25 @@ class RedeSocialFutebolFeminino:
         if 'curtidas' not in video:
             video['curtidas'] = []
         
-        username = self.usuario_logado['username']
-        if username not in video['curtidas']:
-            video['curtidas'].append(username)
+        user_id = self.usuario_logado.get('id')
+        video_id = video.get('id')
+        if not video_id:
+            # Se o vídeo não tem id, gera um
+            video_id = str(uuid.uuid4())
+            video['id'] = video_id
+            self.salvar_videos()
+        
+        # Curtidas agora é uma lista de ids de usuário
+        if user_id not in video['curtidas']:
+            video['curtidas'].append(user_id)
             video['likes'] += 1
             self.salvar_videos()
             
             # Registrar a curtida
             registro = {
                 "tipo": "curtida",
-                "usuario": username,
-                "video_titulo": video['titulo'],
+                "usuario_id": user_id,
+                "video_id": video_id,
                 "data": time.strftime("%Y-%m-%d %H:%M:%S")
             }
             self.curtidas.append(registro)
@@ -495,8 +537,16 @@ class RedeSocialFutebolFeminino:
             if 'comentarios' not in self.videos[indice_video]:
                 self.videos[indice_video]['comentarios'] = []
             
+            user_id = self.usuario_logado.get('id')
+            video = self.videos[indice_video]
+            video_id = video.get('id')
+            if not video_id:
+                video_id = str(uuid.uuid4())
+                video['id'] = video_id
+                self.salvar_videos()
+            
             novo_comentario = {
-                'usuario': self.usuario_logado['username'],
+                'usuario_id': user_id,
                 'comentario': comentario
             }
             self.videos[indice_video]['comentarios'].append(novo_comentario)
@@ -505,8 +555,8 @@ class RedeSocialFutebolFeminino:
             # Registrar o comentário
             registro = {
                 "tipo": "comentario",
-                "usuario": self.usuario_logado['username'],
-                "video_titulo": self.videos[indice_video]['titulo'],
+                "usuario_id": user_id,
+                "video_id": video_id,
                 "comentario": comentario,
                 "data": time.strftime("%Y-%m-%d %H:%M:%S")
             }
@@ -526,18 +576,29 @@ class RedeSocialFutebolFeminino:
             print("💬 COMENTÁRIOS")
             print("="*40)
             for c in comentarios:
-                print(f"👤 @{c['usuario']}: {c['comentario']}")
+                usuario = self.buscar_usuario_por_id(c.get('usuario_id'))
+                username = usuario['username'] if usuario else 'desconhecido'
+                print(f"👤 @{username}: {c['comentario']}")
                 print("-"*40)
         
-        input("\n⏎ Pressione Enter para voltar...")            
+        input("\n⏎ Pressione Enter para voltar...")
 
-    def ver_perfil_autor(self, username_autor):
-        autor = None
+    # NOVOS MÉTODOS DE BUSCA POR ID
+    def buscar_usuario_por_id(self, user_id):
         for usuario in self.usuarios:
-            if usuario['username'] == username_autor:
-                autor = usuario
-                break
-        
+            if usuario.get('id') == user_id:
+                return usuario
+        return None
+
+    def buscar_video_por_id(self, video_id):
+        for video in self.videos:
+            if video.get('id') == video_id:
+                return video
+        return None
+
+    # Exemplo de adaptação: ver_perfil_autor agora pode receber id
+    def ver_perfil_autor(self, id_autor):
+        autor = self.buscar_usuario_por_id(id_autor)
         if autor:
             print("\n" + "="*50)
             print("👤 PERFIL DO AUTOR")
@@ -549,42 +610,8 @@ class RedeSocialFutebolFeminino:
             print("="*50)
         else:
             print("❌ Autor não encontrado!")
-        
         input("\n⏎ Pressione Enter para voltar...")
 
-    def postar_video(self):
-        print("\n" + "="*40)
-        print("🎥 POSTAR VÍDEO")
-        print("="*40)
-        
-        titulo = input("📌 Título do vídeo: ").strip()
-        if not titulo:
-            titulo = "Meu vídeo de futebol ⚽"
-        
-        descricao = input("📝 Descrição do vídeo: ").strip()
-        if not descricao:
-            descricao = "Compartilhando minha paixão pelo futebol!"
-        
-        link = input("🔗 Link do vídeo (URL): ").strip()
-        if not link:
-            link = "https://example.com/novovideo"
-        
-        novo_video = {
-            'titulo': titulo,
-            'descricao': descricao,
-            'autor': self.usuario_logado['username'],
-            "link": link,
-            'visualizacoes': 0,
-            'likes': 0,
-            'curtidas': [],
-            'comentarios': []
-        }
-        
-        self.videos.append(novo_video)
-        self.salvar_videos()
-        
-        print("\n✅ Vídeo postado com sucesso!")
-        time.sleep(1)
 
 if __name__ == "__main__":
     print("⚽ Iniciando Rede Social do Futebol Feminino...")

@@ -1,11 +1,12 @@
 [
   {
     "titulo": "Gol incrível no último minuto! ⚽️",
+    "id": "1",
     "descricao": "Gol de falta decisivo no clássico contra o maior rival. Que emoção!",
     "autor": "jogadora10",
     "link": "https://example.com/video1",
     "visualizacoes": 12500,
-    "likes": 982,
+    "likes": 983,
     "comentarios": [
       {
         "usuario": "futfanatica",
@@ -14,18 +15,12 @@
       {
         "usuario": "maria_torcedora",
         "comentario": "Incrível! Você merece todo esse sucesso! 👏"
-      },
-      {
-        "usuario": "dudu",
-        "comentario": "teste"
       }
-    ],
-    "curtidas": [
-      "dudu"
     ]
   },
   {
     "titulo": "Melhores defesas da temporada 🧤",
+    "id": "2",
     "descricao": "Compilação das defesas que garantiram nossa classificação!",
     "autor": "carol_goleira",
     "link": "https://example.com/video2",
@@ -40,6 +35,7 @@
   },
   {
     "titulo": "Momento emocionante do campeonato 🏆",
+    "id": "3",
     "descricao": "Editando os lances mais incríveis da temporada! #PaixãoPeloFutebol",
     "autor": "bia_torcedora",
     "link": "https://example.com/video3",
