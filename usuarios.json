@@ -24,19 +24,27 @@
     "biografia": "Torcedora fanática! Não perco um jogo e faço parte da torcida organizada! 🔥"
   },
   {
-    "email": "dudu@gmail.com",
-    "senha": "rebeca",
-    "username": "dudu",
-    "nome_real": "dudu",
-    "tipo": "torcedora",
-    "biografia": "teste"
+    "email": "jogadora10@gmail.com",
+    "senha": "senha123",
+    "username": "jogadora10",
+    "nome_real": "Maria Silva",
+    "tipo": "jogadora",
+    "biografia": "Jogadora profissional de futebol ⚽"
   },
   {
-    "email": "rick@gmail.com",
-    "senha": "rebeca",
-    "username": "rick",
-    "nome_real": "rick",
+    "email": "carol_goleira@gmail.com",
+    "senha": "senha123",
+    "username": "carol_goleira",
+    "nome_real": "Carolina Santos",
     "tipo": "jogadora",
-    "biografia": "aaaaaaaa"
+    "biografia": "Goleira apaixonada pelo esporte 🧤"
+  },
+  {
+    "email": "bia_torcedora@gmail.com",
+    "senha": "senha123",
+    "username": "bia_torcedora",
+    "nome_real": "Beatriz Oliveira",
+    "tipo": "torcedora",
+    "biografia": "Torcedora fanática do futebol feminino! 💜"
   }
 ]

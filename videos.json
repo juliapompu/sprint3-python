@@ -5,7 +5,7 @@
     "autor": "jogadora10",
     "link": "https://example.com/video1",
     "visualizacoes": 12500,
-    "likes": 981,
+    "likes": 982,
     "comentarios": [
       {
         "usuario": "futfanatica",
@@ -14,7 +14,14 @@
       {
         "usuario": "maria_torcedora",
         "comentario": "Incrível! Você merece todo esse sucesso! 👏"
+      },
+      {
+        "usuario": "dudu",
+        "comentario": "teste"
       }
+    ],
+    "curtidas": [
+      "dudu"
     ]
   },
   {

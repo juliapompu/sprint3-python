@@ -7,15 +7,17 @@ class RedeSocialFutebolFeminino:
     def __init__(self):
         self.usuario_logado = None
         self.videos = []
+        self.curtidas = []  # Adicionando lista para armazenar curtidas
         self.arquivo_usuarios = 'usuarios.json'
         self.arquivo_videos = 'videos.json'
+        self.arquivo_curtidas = 'curtidas.json'  # Arquivo para salvar curtidas
         
         self.usuarios = self.carregar_usuarios()
         self.videos = self.carregar_videos()
+        self.curtidas = self.carregar_curtidas()  # Carregar curtidas
         
         self.adicionar_usuarios_exemplo()
         self.adicionar_videos_exemplo()
-
 
     def carregar_usuarios(self):
         if os.path.exists(self.arquivo_usuarios):
@@ -35,6 +37,15 @@ class RedeSocialFutebolFeminino:
                 return []
         return []
     
+    def carregar_curtidas(self):
+        if os.path.exists(self.arquivo_curtidas):
+            try:
+                with open(self.arquivo_curtidas, 'r', encoding='utf-8') as arquivo:
+                    return json.load(arquivo)
+            except:
+                return []
+        return []
+    
     def salvar_usuarios(self):
         try:
             with open(self.arquivo_usuarios, 'w', encoding='utf-8') as arquivo:
@@ -49,9 +60,39 @@ class RedeSocialFutebolFeminino:
         except:
             print("Erro ao salvar vídeos!")
     
+    def salvar_curtidas(self):
+        try:
+            with open(self.arquivo_curtidas, 'w', encoding='utf-8') as arquivo:
+                json.dump(self.curtidas, arquivo, ensure_ascii=False, indent=2)
+        except:
+            print("Erro ao salvar curtidas!")
+    
     def adicionar_usuarios_exemplo(self):
         usuarios_exemplo = [
-            
+            {
+                'email': 'jogadora10@gmail.com',
+                'senha': 'senha123',
+                'username': 'jogadora10',
+                'nome_real': 'Maria Silva',
+                'tipo': 'jogadora',
+                'biografia': 'Jogadora profissional de futebol ⚽'
+            },
+            {
+                'email': 'carol_goleira@gmail.com',
+                'senha': 'senha123',
+                'username': 'carol_goleira',
+                'nome_real': 'Carolina Santos',
+                'tipo': 'jogadora',
+                'biografia': 'Goleira apaixonada pelo esporte 🧤'
+            },
+            {
+                'email': 'bia_torcedora@gmail.com',
+                'senha': 'senha123',
+                'username': 'bia_torcedora',
+                'nome_real': 'Beatriz Oliveira',
+                'tipo': 'torcedora',
+                'biografia': 'Torcedora fanática do futebol feminino! 💜'
+            }
         ]
         
         for usuario_exemplo in usuarios_exemplo:
@@ -62,51 +103,51 @@ class RedeSocialFutebolFeminino:
     
     def adicionar_videos_exemplo(self):
         videos_exemplo = [
-        {
-            'titulo': 'Gol incrível no último minuto! ⚽️',
-            'descricao': 'Gol de falta decisivo no clássico contra o maior rival. Que emoção!',
-            'autor': 'jogadora10',
-            'link': "https://example.com/video1",
-            'visualizacoes': 12500,
-            'likes': 980,
-            'curtidas': [],
-            'comentarios': [
-                {"usuario": 'futfanatica', "comentario": "Que golaço! Parabéns! 🎉"},
-                {"usuario": 'maria_torcedora', "comentario": "Incrível! Você merece todo esse sucesso! 👏"},
-                {"usuario": 'ana_jogadora', "comentario": "Inspiração para todas nós! Continue brilhando! ✨"},
-            ]
-        },
-        {
-            'titulo': 'Melhores defesas da temporada 🧤',
-            'descricao': 'Compilação das defesas que garantiram nossa classificação!',
-            'autor': 'carol_goleira',
-            'link': "https://example.com/video2",
-            'visualizacoes': 8900,
-            'likes': 750,
-            'curtidas': [],
-            'comentarios': [
-                {"usuario": 'torcedora_fiel', "comentario": "Você é uma parede! Incrível! 🙌"},
-            ]
-        },
-        {
-            'titulo': 'Momento emocionante do campeonato 🏆',
-            'descricao': 'Editando os lances mais incríveis da temporada! #PaixãoPeloFutebol',
-            'autor': 'bia_torcedora',
-            'link': "https://example.com/video3",
-            'visualizacoes': 15600,
-            'likes': 1200,
-            'curtidas': [],
-            'comentarios': [
-                {"usuario": 'julia_futebol', "comentario": "Amo esse vídeo! Futebol feminino é tudo! 💜"},
-                {"usuario": 'linda_jogadora', "comentario": "Muito orgulho de fazer parte dessa comunidade! Vamos juntas! 💪"},
-            ]
-        }
-    ]
+            {
+                'titulo': 'Gol incrível no último minuto! ⚽️',
+                'descricao': 'Gol de falta decisivo no clássico contra o maior rival. Que emoção!',
+                'autor': 'jogadora10',
+                'link': "https://example.com/video1",
+                'visualizacoes': 12500,
+                'likes': 980,
+                'curtidas': [],
+                'comentarios': [
+                    {"usuario": 'futfanatica', "comentario": "Que golaço! Parabéns! 🎉"},
+                    {"usuario": 'maria_torcedora', "comentario": "Incrível! Você merece todo esse sucesso! 👏"},
+                    {"usuario": 'ana_jogadora', "comentario": "Inspiração para todas nós! Continue brilhando! ✨"},
+                ]
+            },
+            {
+                'titulo': 'Melhores defesas da temporada 🧤',
+                'descricao': 'Compilação das defesas que garantiram nossa classificação!',
+                'autor': 'carol_goleira',
+                'link': "https://example.com/video2",
+                'visualizacoes': 8900,
+                'likes': 750,
+                'curtidas': [],
+                'comentarios': [
+                    {"usuario": 'torcedora_fiel', "comentario": "Você é uma parede! Incrível! 🙌"},
+                ]
+            },
+            {
+                'titulo': 'Momento emocionante do campeonato 🏆',
+                'descricao': 'Editando os lances mais incríveis da temporada! #PaixãoPeloFutebol',
+                'autor': 'bia_torcedora',
+                'link': "https://example.com/video3",
+                'visualizacoes': 15600,
+                'likes': 1200,
+                'curtidas': [],
+                'comentarios': [
+                    {"usuario": 'julia_futebol', "comentario": "Amo esse vídeo! Futebol feminino é tudo! 💜"},
+                    {"usuario": 'linda_jogadora', "comentario": "Muito orgulho de fazer parte dessa comunidade! Vamos juntas! 💪"},
+                ]
+            }
+        ]
     
         if not self.videos:
             self.videos = videos_exemplo
             self.salvar_videos()
-    
+
     def validar_email(self, email):
         formato_valido = r'^[a-zA-Z0-9._%+-]+@gmail\.com$'
         return re.match(formato_valido, email) is not None
@@ -395,12 +436,11 @@ class RedeSocialFutebolFeminino:
             if indice_atual < len(self.videos) - 1:
                 print("2. ➡️  Próximo vídeo")
             print("3. 👤 Ver perfil de @" + video['autor'])
-            print("4. ↩️  Voltar ao menu")
-            print("5. ❤️ Curtir este vídeo")
-            print("6. 💬 Comentar neste vídeo")
-            print("7. 👀 Ver comentários")
-            print("8. ↩️  Voltar ao menu")
-
+            print("4. ❤️ Curtir este vídeo")
+            print("5. 💬 Comentar neste vídeo")
+            print("6. 👀 Ver comentários")
+            print("7. ↩️  Voltar ao menu")
+            
             try:
                 escolha = int(input("\n👉 Escolha uma opção: "))
                 
@@ -411,14 +451,12 @@ class RedeSocialFutebolFeminino:
                 elif escolha == 3:
                     self.ver_perfil_autor(video['autor'])
                 elif escolha == 4:
-                    break
-                elif escolha == 5:
                     self.curtir_video(indice_atual)
-                elif escolha == 6:
+                elif escolha == 5:
                     self.comentar_video(indice_atual)
-                elif escolha == 7:
+                elif escolha == 6:
                     self.ver_comentarios_video(indice_atual)
-                elif escolha == 8:
+                elif escolha == 7:
                     break
                 else:
                     print("❌ Opção inválida!")
@@ -430,10 +468,23 @@ class RedeSocialFutebolFeminino:
         video = self.videos[indice_video]
         if 'curtidas' not in video:
             video['curtidas'] = []
-        if self.usuario_logado['username'] not in video['curtidas']:
-            video['curtidas'].append(self.usuario_logado['username'])
+        
+        username = self.usuario_logado['username']
+        if username not in video['curtidas']:
+            video['curtidas'].append(username)
             video['likes'] += 1
             self.salvar_videos()
+            
+            # Registrar a curtida
+            registro = {
+                "tipo": "curtida",
+                "usuario": username,
+                "video_titulo": video['titulo'],
+                "data": time.strftime("%Y-%m-%d %H:%M:%S")
+            }
+            self.curtidas.append(registro)
+            self.salvar_curtidas()
+            
             print("❤️ Você curtiu este vídeo!")
         else:
             print("❌ Você já curtiu este vídeo.")
@@ -441,23 +492,9 @@ class RedeSocialFutebolFeminino:
     def comentar_video(self, indice_video):
         comentario = input("💬 Escreva seu comentário: ").strip()
         if comentario:
-            if not isinstance(self.videos[indice_video].get('comentarios'), list):
+            if 'comentarios' not in self.videos[indice_video]:
                 self.videos[indice_video]['comentarios'] = []
-            novo_comentario = {
-                'usuario': self.usuario_logado['username'],
-                'comentario': comentario
-            }
-            self.videos[indice_video]['comentarios'].append(novo_comentario)
-            self.salvar_videos()
-            print("✅ Comentário adicionado!")
-        else:
-            print("❌ Comentário vazio não foi adicionado.")     
-
-    def comentar_video(self, indice_video):
-        comentario = input("💬 Escreva seu comentário: ").strip()
-        if comentario:
-            if not isinstance(self.videos[indice_video].get('comentarios'), list):
-                self.videos[indice_video]['comentarios'] = []           
+            
             novo_comentario = {
                 'usuario': self.usuario_logado['username'],
                 'comentario': comentario
@@ -465,11 +502,13 @@ class RedeSocialFutebolFeminino:
             self.videos[indice_video]['comentarios'].append(novo_comentario)
             self.salvar_videos()
 
+            # Registrar o comentário
             registro = {
                 "tipo": "comentario",
                 "usuario": self.usuario_logado['username'],
                 "video_titulo": self.videos[indice_video]['titulo'],
-                "comentario": comentario
+                "comentario": comentario,
+                "data": time.strftime("%Y-%m-%d %H:%M:%S")
             }
             self.curtidas.append(registro)
             self.salvar_curtidas()
