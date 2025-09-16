@@ -22,5 +22,21 @@
     "nome_real": "Beatriz Santos",
     "tipo": "torcedora",
     "biografia": "Torcedora fanática! Não perco um jogo e faço parte da torcida organizada! 🔥"
+  },
+  {
+    "email": "dudu@gmail.com",
+    "senha": "rebeca",
+    "username": "dudu",
+    "nome_real": "dudu",
+    "tipo": "torcedora",
+    "biografia": "teste"
+  },
+  {
+    "email": "rick@gmail.com",
+    "senha": "rebeca",
+    "username": "rick",
+    "nome_real": "rick",
+    "tipo": "jogadora",
+    "biografia": "aaaaaaaa"
   }
 ]

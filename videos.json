@@ -3,21 +3,50 @@
     "titulo": "Gol incrível no último minuto! ⚽️",
     "descricao": "Gol de falta decisivo no clássico contra o maior rival. Que emoção!",
     "autor": "jogadora10",
+    "link": "https://example.com/video1",
     "visualizacoes": 12500,
-    "likes": 980
+    "likes": 981,
+    "comentarios": [
+      {
+        "usuario": "futfanatica",
+        "comentario": "Que golaço! Parabéns! 🎉"
+      },
+      {
+        "usuario": "maria_torcedora",
+        "comentario": "Incrível! Você merece todo esse sucesso! 👏"
+      }
+    ]
   },
   {
     "titulo": "Melhores defesas da temporada 🧤",
     "descricao": "Compilação das defesas que garantiram nossa classificação!",
     "autor": "carol_goleira",
+    "link": "https://example.com/video2",
     "visualizacoes": 8900,
-    "likes": 750
+    "likes": 750,
+    "comentarios": [
+      {
+        "usuario": "torcedora_fiel",
+        "comentario": "Você é uma parede! Incrível! 🙌"
+      }
+    ]
   },
   {
     "titulo": "Momento emocionante do campeonato 🏆",
     "descricao": "Editando os lances mais incríveis da temporada! #PaixãoPeloFutebol",
     "autor": "bia_torcedora",
+    "link": "https://example.com/video3",
     "visualizacoes": 15600,
-    "likes": 1200
+    "likes": 1200,
+    "comentarios": [
+      {
+        "usuario": "julia_futebol",
+        "comentario": "Amo esse vídeo! Futebol feminino é tudo! 💜"
+      },
+      {
+        "usuario": "linda_jogadora",
+        "comentario": "Muito orgulho de fazer parte dessa comunidade! Vamos juntas! 💪"
+      }
+    ]
   }
 ]
